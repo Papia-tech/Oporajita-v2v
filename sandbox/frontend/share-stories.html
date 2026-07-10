@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Story | SafeSphere</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==================== COLOR MANAGEMENT SYSTEM ==================== */
+        :root {
+            --accent-color: #941E26;
+            --accent-hover: #75161c;
+            
+            --bg-light: #E7D1A9;
+            --text-dark: #2c1a11;
+            --text-muted: #655546;
+            --badge-bg: #fdfaf4;
+            --badge-border: #e1d4be;
+            
+            --card-bg: #f3dfba;
+            --card-border: rgba(148, 30, 38, 0.15);
+            --control-bg: #e1d4be;
+
+            --nav-bg: rgba(231, 209, 169, 0.6);
+            --nav-border: rgba(44, 26, 17, 0.15);
+            --nav-text: #3e2b1c;
+
+            --input-focus: rgba(148, 30, 38, 0.25);
+        }
+
+        body[data-theme="dark"] {
+            --bg-light: #0d0f14;
+            --text-dark: #f1ebd9;
+            --text-muted: #a3aab5;
+            --badge-bg: #161a23;
+            --badge-border: #2c3545;
+            
+            --card-bg: #161a23;
+            --card-border: rgba(255, 255, 255, 0.05);
+            --control-bg: #1c222e;
+            
+            --nav-bg: rgba(22, 26, 35, 0.5);
+            --nav-border: rgba(255, 255, 255, 0.1);
+            --nav-text: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            transition: background-color 0.3s, color 0.3s;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* For the entire page */
+html {
+  /* Hides scrollbar for Firefox */
+  scrollbar-width: none; 
+  
+  /* Hides scrollbar for IE and Edge (older versions) */
+  -ms-overflow-style: none;  
+}
+
+/* Hides scrollbar for Chrome, Safari, and newer Edge */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+        /* ==================== SPLIT-SIDE CONTAINER LAYOUT ==================== */
+        .form-section {
+            flex: 1;
+            padding: 60px 4% 140px 4%; /* Reduced top padding to move card up */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .split-card {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr; 
+            width: 100%;
+            max-width: 1000px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-top: 5px solid var(--accent-color);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            overflow: hidden; 
+            transition: background-color 0.3s, border 0.3s, box-shadow 0.3s;
+        }
+
+        body[data-theme="dark"] .split-card {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        /* --- Left Side: Content Form Panel --- */
+        .form-side {
+            padding: 30px 45px; /* Shrunk slightly from 40px to drop card height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-header {
+            margin-bottom: 18px; /* Reduced margin */
+        }
+
+        .form-badge {
+            display: inline-block;
+            background-color: rgba(148, 30, 38, 0.1);
+            color: var(--accent-color);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .form-title {
+            font-family: 'Georgia', serif;
+            font-size: 30px; /* Slight drop in header size */
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .form-subtitle {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* --- Right Side: Mixed Showcase Panel --- */
+        .showcase-side {
+            background-color: var(--card-bg); 
+            border-left: none; 
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end; 
+            justify-content: center;
+            padding: 30px; /* Matched lower padding profile */
+            overflow: hidden;
+            transition: background-color 0.3s;
+        }
+
+        /* Positioned cleanly on the right edge with standard bounds */
+        .mandala-graphic {
+            max-width: 500px;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            object-fit: contain;
+            object-position: right center; 
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body[data-theme="dark"] .mandala-graphic {
+            opacity: 0.08;
+            filter: invert(1);
+        }
+
+        .showcase-text-box {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 260px;
+            margin-right: 20px; 
+        }
+
+        .showcase-title {
+            font-family: 'Georgia', serif;
+            font-size: 22px;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .showcase-desc {
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-muted);
+            margin: 0 auto;
+        }
+
+        /* --- Inputs & Form Elements --- */
+        .form-group {
+            margin-bottom: 14px; /* Reduced from 20px */
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .form-group label span {
+            color: var(--accent-color);
+        }
+
+        .input-control {
+            width: 100%;
+            background-color: var(--control-bg); /* Adjusted from --badge-bg to prevent white backgrounds */
+            border: 1px solid var(--badge-border);
+            color: var(--text-dark);
+            font-family: inherit;
+            font-size: 14.5px;
+            padding: 10px 14px; /* Shrunk down layout segment height */
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.25s ease;
+        }
+
+        .input-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px var(--input-focus);
+            background-color: var(--control-bg);
+        }
+
+        textarea.input-control {
+            resize: vertical;
+            min-height: 100px; /* Reduced height signature */
+            line-height: 1.4;
+        }
+
+        .select-control {
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23655546' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 14px;
+            padding-right: 35px;
+        }
+
+        body[data-theme="dark"] .select-control {
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a3aab5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+        }
+
+        /* Read-only block styling refinement */
+        .input-control[readonly] {
+            opacity: 0.85;
+            cursor: not-allowed;
+            border-style: dashed;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px; /* Reduced tracking margin */
+        }
+
+        .btn {
+            padding: 10px 24px; /* Shrunk padding track */
+            font-size: 13.5px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-submit {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: 2px solid var(--accent-color);
+            flex: 2;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .btn-cancel {
+            background-color: transparent;
+            color: var(--text-dark);
+            border: 2px solid var(--badge-border);
+            flex: 1;
+        }
+
+        .btn-cancel:hover {
+            background-color: var(--badge-border);
+        }
+
+        /* ==================== FLOATING BOTTOM NAVBAR ==================== */
+        .bottom-nav {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 84%;
+            max-width: 1200px;
+            background: var(--nav-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--nav-border);
+            border-radius: 50px;
+            padding: 15px 40px;
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            align-items: center;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+            transition: background-color 0.3s, border 0.3s;
+        }
+
+        .bottom-nav .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--nav-text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+            justify-self: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--nav-text);
+            font-size: 15px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links .active-link {
+            color: var(--accent-color);
+        }
+
+        .right-menu-group {
+            justify-self: end;
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--nav-text);
+            font-size: 18px;
+            cursor: pointer;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.3s;
+        }
+
+        /* ==================== RESPONSIVE RULES ==================== */
+        @media (max-width: 900px) {
+            .split-card { grid-template-columns: 1fr; } 
+            .showcase-side { display: none; } 
+            .bottom-nav { width: 92%; display: flex; justify-content: space-between; }
+        }
+
+        @media (max-width: 650px) {
+            .form-section { padding: 30px 4% 160px 4%; }
+            .form-side { padding: 25px 20px; }
+            .form-title { font-size: 24px; }
+            .form-actions { flex-direction: column-reverse; }
+            .btn { width: 100%; }
+            .bottom-nav {
+                border-radius: 20px;
+                flex-direction: column;
+                gap: 15px;
+                bottom: 15px;
+                padding: 15px;
+            }
+            .nav-links { flex-direction: column; gap: 10px; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="form-section">
+        <div class="split-card">
+            
+            <div class="form-side">
+                <div class="form-header">
+                    <div class="form-badge">Safe Space</div>
+                    <h1 class="form-title">Share Your Story</h1>
+                    <p class="form-subtitle">Your voice matters. Express your experience securely within our verified system framework.</p>
+                </div>
+
+                <form id="addStoryForm" onsubmit="handleStorySubmission(event)">
+                    <div class="form-group">
+                        <label for="storyTitle">Story Title <span>*</span></label>
+                        <input type="text" id="title" class="input-control" placeholder="e.g., Public Transit Incident" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="storyCategory">Category <span>*</span></label>
+                        <select id="category" class="input-control select-control" required>
+                            <option value="" disabled selected>Select a relevant sector tag...</option>
+                            <option value="Transit Security">Transit Security</option>
+                            <option value="Workplace Safety">Workplace Safety</option>
+                            <option value="Cyber Safety">Cyber Safety</option>
+                            <option value="Community Support">Community Support</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="storyBody">Your Narrative <span>*</span></label>
+                        <textarea id="story" class="input-control" placeholder="Write your narrative cleanly here..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aliasPreference">Generated Anonymous Signature</label>
+                        <input type="text" id="aliasPreference" class="input-control" readonly>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="index.html" class="btn btn-cancel">Cancel</a>
+                        <button type="submit" class="btn btn-submit">
+                            Publish <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="showcase-side">
+                <img class="mandala-graphic" src="assets/images/mandala.png" alt="Decorative Ambient Ring Background">
+                <div class="showcase-text-box">
+                    <h3 class="showcase-title">Absolute Anonymity</h3>
+                    <p class="showcase-desc">Advanced protection systems cleanly separate your account metadata details from shared landing elements.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="logo">Birangana</a>
+        <ul class="nav-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="share-stories.html" class="active-link">Share Story</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="right-menu-group">
+            <button class="theme-toggle-btn" id="themeToggle" title="Toggle Theme Layout">
+                <i class="fa-solid fa-moon" id="toggleIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (sessionStorage.getItem('theme') === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            toggleIcon.className = 'fa-solid fa-sun';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                toggleIcon.className = 'fa-solid fa-moon';
+                sessionStorage.setItem('theme', 'light');
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                toggleIcon.className = 'fa-solid fa-sun';
+                sessionStorage.setItem('theme', 'dark');
+            }
+        });
+
+        function generateAnonymousAlias() {
+            const strings = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let customHash = '';
+            for (let i = 0; i < 6; i++) {
+                customHash += strings.charAt(Math.floor(Math.random() * strings.length));
+            }
+            document.getElementById('aliasPreference').value = `| Anonymous_${customHash}`;
+        }
+
+        function handleStorySubmission(e) {
+            e.preventDefault();
+            alert(`Success! Story has been verified and logged.`);
+            window.location.href = "index.html#stories";
+        }
+
+        generateAnonymousAlias();
+    </script>
+    <script>
+async function handleStorySubmission(event) {
+    event.preventDefault();
+
+    const title = document.getElementById("title").value;
+    const category = document.getElementById("category").value;
+    const story = document.getElementById("story").value;
+
+    try {
+        const response = await fetch("http://localhost:5000/api/stories", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title,
+                category,
+                story
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("✅ Story shared successfully!");
+
+            document.getElementById("addStoryForm").reset();
+
+            document.getElementById("aliasPreference").value =
+                "Anonymous_" + Math.random().toString(36).substring(2, 8);
+        } else {
+            alert(data.message || "Failed to share story.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Cannot connect to the server.");
+    }
+}
+
+window.onload = function () {
+    document.getElementById("aliasPreference").value =
+        "Anonymous_" + Math.random().toString(36).substring(2, 8);
+};
+</script>
+</body>
+</html>

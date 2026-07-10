@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>About Us | Birangana</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+background:#f8f3e8;
+color:#333;
+overflow-x:hidden;
+
+}
+
+/* Navigation */
+
+header{
+
+position:fixed;
+top:20px;
+left:50%;
+transform:translateX(-50%);
+width:90%;
+background:white;
+border-radius:50px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:18px 45px;
+
+z-index:1000;
+
+}
+
+.logo{
+
+font-size:32px;
+font-weight:700;
+color:#222;
+
+}
+
+.logo span{
+
+color:#a43846;
+
+}
+
+nav{
+
+display:flex;
+gap:30px;
+
+}
+
+nav a{
+
+text-decoration:none;
+color:#444;
+font-weight:500;
+transition:.3s;
+
+}
+
+nav a:hover{
+
+color:#a43846;
+
+}
+
+/* Hero */
+
+.hero{
+
+height:100vh;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:120px 8% 60px;
+
+background:#f8f3e8;
+
+}
+
+.left{
+
+width:48%;
+
+}
+
+.badge{
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:50px;
+
+background:#fff;
+
+color:#a43846;
+
+font-size:14px;
+
+margin-bottom:20px;
+
+}
+
+.left h1{
+
+font-size:64px;
+
+line-height:1.1;
+
+margin-bottom:25px;
+
+}
+
+.left h1 span{
+
+color:#a43846;
+
+}
+
+.left p{
+
+font-size:18px;
+
+line-height:1.9;
+
+color:#555;
+
+margin-bottom:35px;
+
+}
+
+.btn{
+
+display:inline-block;
+
+padding:15px 35px;
+
+background:#8b2f3d;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:8px;
+
+font-weight:600;
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+background:#702430;
+
+}
+
+.right{
+
+width:45%;
+
+text-align:center;
+
+}
+
+.right img{
+
+width:95%;
+
+max-width:520px;
+
+}
+
+/* Section */
+
+section{
+
+padding:90px 8%;
+
+}
+
+.section-title{
+
+text-align:center;
+
+font-size:46px;
+
+color:#8b2f3d;
+
+margin-bottom:20px;
+
+}
+
+.section-sub{
+
+text-align:center;
+
+max-width:800px;
+
+margin:auto;
+
+color:#555;
+
+line-height:1.8;
+
+margin-bottom:60px;
+
+}
+
+/* Cards */
+
+.grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+gap:30px;
+
+}
+
+.card{
+
+background:white;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+transition:.4s;
+
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.card i{
+
+font-size:42px;
+
+color:#8b2f3d;
+
+margin-bottom:20px;
+
+}
+
+.card h2{
+
+margin-bottom:15px;
+
+color:#222;
+
+}
+
+.card p{
+
+line-height:1.8;
+
+color:#555;
+
+}
+/* Mission Section */
+
+.mission{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:40px;
+align-items:center;
+
+}
+
+.mission img{
+
+width:100%;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+
+}
+
+.mission-text h2{
+
+font-size:42px;
+margin-bottom:25px;
+color:#8b2f3d;
+
+}
+
+.mission-text p{
+
+line-height:2;
+font-size:18px;
+color:#555;
+margin-bottom:18px;
+
+}
+
+/* Statistics */
+
+.stats{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:60px;
+
+}
+
+.stat{
+
+background:white;
+padding:40px;
+text-align:center;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.stat h1{
+
+font-size:50px;
+color:#8b2f3d;
+
+}
+
+.stat p{
+
+margin-top:12px;
+font-size:18px;
+
+}
+
+/* CTA */
+
+.cta{
+
+background:#8b2f3d;
+padding:80px;
+border-radius:30px;
+text-align:center;
+color:white;
+
+}
+
+.cta h1{
+
+font-size:48px;
+margin-bottom:25px;
+
+}
+
+.cta p{
+
+font-size:18px;
+line-height:1.8;
+margin-bottom:35px;
+
+}
+
+.cta a{
+
+background:white;
+color:#8b2f3d;
+padding:16px 40px;
+border-radius:10px;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+
+}
+
+.cta a:hover{
+
+background:#f5e6e8;
+
+}
+
+/* Footer */
+
+footer{
+
+background:#222;
+color:white;
+padding:50px 8%;
+text-align:center;
+margin-top:80px;
+
+}
+
+footer h2{
+
+font-size:34px;
+margin-bottom:15px;
+
+}
+
+footer p{
+
+color:#ddd;
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+header{
+
+flex-direction:column;
+padding:20px;
+
+}
+
+nav{
+
+margin-top:20px;
+flex-wrap:wrap;
+justify-content:center;
+
+}
+
+.hero{
+
+flex-direction:column-reverse;
+text-align:center;
+
+}
+
+.left,
+.right{
+
+width:100%;
+
+}
+
+.left h1{
+
+font-size:46px;
+
+}
+
+.right{
+
+margin-bottom:50px;
+
+}
+
+}
+
+</style>
+<body>
+
+<header>
+
+<div class="logo">
+🛡 <span>Birangana</span>
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="stories.html">Stories</a>
+
+<a href="share-stories.html">Share Story</a>
+
+<a href="resources.html">Resources</a>
+
+<a href="about.html">About</a>
+
+<a href="contact.html">Contact</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="left">
+
+<div class="badge">
+Smart • Secure • Together
+</div>
+
+<h1>
+
+About <span>Birangana</span>
+
+</h1>
+
+<p>
+
+Birangana is an AI-powered women's safety platform designed to provide emergency assistance, verified resources, anonymous community storytelling, and safe navigation. Our mission is to empower every woman with confidence, security, and technology.
+
+</p>
+
+<a href="signup.html" class="btn">
+Join Our Community
+</a>
+
+</div>
+
+<div class="right">
+
+<img src="assets/images/signup.jpg">
+
+</div>
+
+</section>
+<!-- ===================== ABOUT SECTION ===================== -->
+
+<section>
+
+<h1 class="section-title">Who We Are</h1>
+
+<p class="section-sub">
+
+Birangana is a dedicated women's safety platform that combines
+technology, awareness, community support, and emergency assistance
+to help women feel safe, confident, and empowered everywhere.
+
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+<h2>Our Mission</h2>
+
+<p>
+
+To provide women with reliable safety tools, verified resources,
+emergency support, and a secure platform where they can seek help,
+share experiences, and build confidence.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-eye"></i>
+
+<h2>Our Vision</h2>
+
+<p>
+
+We envision a society where every woman feels safe,
+respected, independent, and empowered through innovative
+technology and compassionate communities.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-bullseye"></i>
+
+<h2>Our Goal</h2>
+
+<p>
+
+Our goal is to reduce fear, encourage awareness,
+strengthen community support, and make safety accessible
+to every woman through digital innovation.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================== VALUES ===================== -->
+
+<section>
+
+<h1 class="section-title">
+
+Our Core Values
+
+</h1>
+
+<p class="section-sub">
+
+Everything we build is based on trust, respect, safety,
+and empowerment.
+
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fa-solid fa-heart"></i>
+
+<h2>Respect</h2>
+
+<p>
+
+Every woman deserves dignity, equality, and respect
+regardless of age, profession, or background.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-user-shield"></i>
+
+<h2>Safety</h2>
+
+<p>
+
+We prioritize safety by providing emergency support,
+resources, and awareness tools that can make a real difference.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-handshake"></i>
+
+<h2>Community</h2>
+
+<p>
+
+Building a supportive community where women help,
+inspire, and protect each other.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-lightbulb"></i>
+
+<h2>Innovation</h2>
+
+<p>
+
+Using modern technology and AI solutions
+to improve women's safety and confidence.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===================== FEATURES ===================== -->
+
+<section>
+
+<h1 class="section-title">
+
+Why Choose Birangana?
+
+</h1>
+
+<p class="section-sub">
+
+Birangana offers intelligent safety solutions
+designed specifically for women.
+
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fa-solid fa-bell"></i>
+
+<h2>Emergency SOS</h2>
+
+<p>
+
+Quick emergency alerts with instant assistance.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<h2>Live Location</h2>
+
+<p>
+
+Share your live location with trusted contacts.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-book-open"></i>
+
+<h2>Verified Resources</h2>
+
+<p>
+
+Access NGOs, police, legal services,
+mental health support and helplines.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-comments"></i>
+
+<h2>Community Stories</h2>
+
+<p>
+
+Read and share inspiring stories anonymously
+to encourage and support other women.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-map-location-dot"></i>
+
+<h2>Safe Navigation</h2>
+
+<p>
+
+AI-powered safe route suggestions
+to reduce travel risks.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-brain"></i>
+
+<h2>Smart Assistance</h2>
+
+<p>
+
+Future-ready AI support for women's safety,
+awareness, and emergency guidance.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- ===================== STATISTICS ===================== -->
+
+<section>
+
+<h1 class="section-title">
+Our Impact
+</h1>
+
+<p class="section-sub">
+Together we are creating a safer and more supportive future for women.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<h1>10K+</h1>
+<p>Women Empowered</p>
+</div>
+
+<div class="stat">
+<h1>500+</h1>
+<p>Stories Shared</p>
+</div>
+
+<div class="stat">
+<h1>100+</h1>
+<p>Verified Resources</p>
+</div>
+
+<div class="stat">
+<h1>24×7</h1>
+<p>Emergency Support</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== TEAM ===================== -->
+
+<section>
+
+<h1 class="section-title">
+Meet Our Team
+</h1>
+
+<p class="section-sub">
+Birangana is built by passionate students who believe technology can create a safer society.
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<i class="fa-solid fa-laptop-code"></i>
+
+<h2>Development Team</h2>
+
+<p>
+
+A dedicated team of developers creating innovative solutions for women's safety using modern web technologies.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-users"></i>
+
+<h2>Community</h2>
+
+<p>
+
+Our strength comes from women who share experiences, support one another, and inspire positive change.
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-hand-holding-heart"></i>
+
+<h2>Our Promise</h2>
+
+<p>
+
+We promise to continuously improve Birangana by adding smart safety features, trusted resources, and community support.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===================== CTA ===================== -->
+
+<section>
+
+<div class="cta">
+
+<h1>
+Together We Can Make Every Woman Feel Safe
+</h1>
+
+<p>
+
+Join Birangana today and become part of a growing community dedicated to women's safety, awareness, empowerment, and support.
+
+</p>
+
+<a href="signup.html">
+
+Join Birangana
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+
+<footer>
+
+<h2>🛡 Birangana</h2>
+
+<p>
+
+Empowering Women Through Technology, Awareness and Community Support.
+
+</p>
+
+<br>
+
+<p>
+
+© 2026 Birangana | All Rights Reserved
+
+</p>
+
+</footer>
+
+<script>
+
+const cards=document.querySelectorAll(".card");
+
+window.addEventListener("scroll",()=>{
+
+cards.forEach(card=>{
+
+const top=card.getBoundingClientRect().top;
+
+if(top<window.innerHeight-80){
+
+card.style.opacity="1";
+card.style.transform="translateY(0px)";
+
+}
+
+});
+
+});
+
+cards.forEach(card=>{
+
+card.style.opacity="0";
+card.style.transform="translateY(60px)";
+card.style.transition=".8s";
+
+});
+
+</script>
+
+</body>
+
+</html>
