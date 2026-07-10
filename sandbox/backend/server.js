@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const connectDB = require("./config/database");
 const storyRoutes = require("./routes/storyRoutes");
 const authRoutes = require("./routes/authRoutes");
+const path = require("path");
 dotenv.config();
 
 // Connect to MongoDB
@@ -23,15 +24,20 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/stories", storyRoutes);
 
-// Test Route
+// Serve frontend files
+app.use(express.static(path.join(__dirname, "../frontend")));
+
+// Home page
 app.get("/", (req, res) => {
-  res.json({
-    success: true,
-    message: "Birangana Backend Server is Running Successfully 🚀"
-  });
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
 
+
 const PORT = process.env.PORT || 5000;
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
